@@ -29,7 +29,7 @@ export default function middleware(req) {
   const userRole = role && role.split("super ").join("");
 
   if (pathname == "/") {
-    if (jwt && userRole) {
+    if (jwt || userRole) {
       return NextResponse.redirect(`${origin}/${userRole}`);
     } else {
       NextResponse.redirect(`${origin}`);
@@ -39,7 +39,7 @@ export default function middleware(req) {
   }
 
   if (url.includes("/login")) {
-    if (jwt && userRole) {
+    if (jwt || userRole) {
       return NextResponse.redirect(`${origin}/${userRole}`);
     }
     return NextResponse.next();
