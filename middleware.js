@@ -21,7 +21,7 @@
 import { NextResponse } from "next/server";
 
 export default function middleware(req) {
-  const { cookies, url, nextUrl, basePath } = req;
+  const { cookies, url } = req;
   const jwt = cookies.get("next-auth.session-token");
   const role = cookies.get("role");
   const { origin, pathname } = req.nextUrl;
