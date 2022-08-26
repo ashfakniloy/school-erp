@@ -39,7 +39,7 @@ export default function middleware(req) {
   }
 
   if (url.includes("/login")) {
-    if (jwt) {
+    if (jwt && userRole) {
       return NextResponse.redirect(`${origin}/${userRole}`);
     }
     return NextResponse.next();
