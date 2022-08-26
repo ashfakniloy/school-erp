@@ -31,14 +31,21 @@ const nextAuthOptions = (req, res) => {
 
           if (response.ok && user) {
             res.setHeader("Set-Cookie", [
-              cookie.serialize("role", user.role, {
+              cookie.serialize("token", user.token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV !== "development",
+                maxAge: 30 * 24 * 60 * 60, // 30 days
+                sameSite: "strict",
+                path: "/",
+              }),
+              cookie.serialize("id", user.id, {
                 // httpOnly: true,
                 // secure: process.env.NODE_ENV !== "development",
                 maxAge: 30 * 24 * 60 * 60, // 30 days
                 sameSite: "strict",
                 path: "/",
               }),
-              cookie.serialize("id", user.id, {
+              cookie.serialize("role", user.role, {
                 // httpOnly: true,
                 // secure: process.env.NODE_ENV !== "development",
                 maxAge: 30 * 24 * 60 * 60, // 30 days

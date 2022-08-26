@@ -22,14 +22,15 @@ import { NextResponse } from "next/server";
 
 export default function middleware(req) {
   const { cookies, url } = req;
-  const jwt = cookies.get("next-auth.session-token");
+  // const jwt = cookies.get("next-auth.session-token");
+  const jwt = cookies.get("token");
   const role = cookies.get("role");
   const { origin, pathname } = req.nextUrl;
 
   const userRole = role && role.split("super ").join("");
 
   if (pathname == "/") {
-    if (jwt || userRole) {
+    if (jwt && userRole) {
       return NextResponse.redirect(`${origin}/${userRole}`);
     } else {
       NextResponse.redirect(`${origin}`);
@@ -39,7 +40,7 @@ export default function middleware(req) {
   }
 
   if (url.includes("/login")) {
-    if (jwt || userRole) {
+    if (jwt && userRole) {
       return NextResponse.redirect(`${origin}/${userRole}`);
     }
     return NextResponse.next();
