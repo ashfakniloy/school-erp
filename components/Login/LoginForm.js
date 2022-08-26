@@ -37,18 +37,18 @@ function LoginForm({ user, loginRoute, dashboardRoute }) {
 
   const router = useRouter();
 
-  const { data } = useSession();
-  const { token, id, user_name, institution_name, role } = data
-    ? data.user
-    : "";
+  // const { data } = useSession();
+  // const { token, id, user_name, institution_name, role } = data
+  //   ? data.user
+  //   : "";
 
-  console.log("session is", token);
+  // console.log("session is", token);
 
-  id && Cookies.set("id", id, { expires: 30 });
-  user_name && Cookies.set("user_name", user_name, { expires: 30 });
-  institution_name &&
-    Cookies.set("institution_name", institution_name, { expires: 30 });
-  role && Cookies.set("role", role, { expires: 30 });
+  // id && Cookies.set("id", id, { expires: 30 });
+  // user_name && Cookies.set("user_name", user_name, { expires: 30 });
+  // institution_name &&
+  //   Cookies.set("institution_name", institution_name, { expires: 30 });
+  // role && Cookies.set("role", role, { expires: 30 });
   // Cookies.set('id', id)
 
   // const dispatch = useDispatch();

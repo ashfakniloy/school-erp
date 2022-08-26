@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 
 function Home() {
-  const router = useRouter();
-  const { data } = useSession();
-  const { role } = data ? data.user : "";
+  // const router = useRouter();
+  // const { data } = useSession();
+  // const { role } = data ? data.user : "";
 
   // useEffect(() => {
   //   if (role) {
@@ -14,15 +14,21 @@ function Home() {
   //   }
   // }, [role, router]);
 
-  if (!role) {
-    return (
-      <>
-        <Login />
-      </>
-    );
-  } else {
-    Router.reload();
-  }
+  // if (!role) {
+  //   return (
+  //     <>
+  //       <Login />
+  //     </>
+  //   );
+  // } else {
+  //   router.reload();
+  // }
+
+  return (
+    <>
+      <Login />
+    </>
+  );
 }
 
 export default Home;
