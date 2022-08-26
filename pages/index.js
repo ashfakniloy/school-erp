@@ -16,15 +16,15 @@ function Home() {
   //   }
   // }, [role, router]);
 
-  if (!role) {
-    return (
-      <>
-        <Login />
-      </>
-    );
-  } else {
-    router.reload();
-  }
+  // if (!role) {
+  //   return (
+  //     <>
+  //       <Login />
+  //     </>
+  //   );
+  // } else {
+  //   router.reload();
+  // }
 
   return (
     <>
