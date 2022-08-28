@@ -19,14 +19,14 @@ function Header({
   setShowMenu,
   logo,
   photo,
-  // userName,
-  // institutionName,
-  // role,
+  user_name,
+  institution_name,
+  role,
 }) {
   // const { institutionName, username } = useSelector((state) => state.login);
 
-  const { data } = useSession();
-  const { institution_name, user_name, role } = data ? data.user : "";
+  // const { data } = useSession();
+  // const { institution_name, user_name, role } = data ? data.user : "";
 
   return (
     <div className=" bg-white w-full min-h-[67px] flex justify-between items-center shadow-md pl-2 pr-5 py-2 sticky top-0 z-10">

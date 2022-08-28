@@ -34,7 +34,7 @@ function AdminPage() {
     total_female,
     notice,
     // role,
-  } = fetchedData ? fetchedData : "";
+  } = fetchedData;
 
   return (
     <Layout>

@@ -42,7 +42,9 @@ function Layout({ children }) {
 
   // const user = user_role && user_role;
 
-  // const { fetchedData } = useGetData(`student/personal/data`);
+  const { fetchedData } = useGetData(`student/personal/data`);
+
+  const { photo, logo } = fetchedData;
 
   // useEffect(() => {
   //   fetchedData && dispatch(getInfo(fetchedData));
@@ -73,17 +75,15 @@ function Layout({ children }) {
       />
 
       <div className="flex-1 min-h-screen">
-        <NonSSRWrapper>
-          <Header
-            showMenu={showMenu}
-            setShowMenu={setShowMenu}
-            // logo={logo}
-            // photo={photo}
-            userName={user_name}
-            institutionName={institution_name}
-            role={role}
-          />
-        </NonSSRWrapper>
+        <Header
+          showMenu={showMenu}
+          setShowMenu={setShowMenu}
+          logo={logo}
+          photo={photo}
+          user_name={user_name}
+          institution_name={institution_name}
+          role={role}
+        />
 
         {loading && <Loader />}
 

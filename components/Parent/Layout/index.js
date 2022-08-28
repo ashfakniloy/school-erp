@@ -9,6 +9,7 @@ import Sidebar from "../../Layout/Sidebar";
 import { parent } from "../../Layout/Sidebar/navlinks/parent";
 import { getInfo } from "../../../redux/features/info/infoSlice";
 import useGetData from "../../Hooks/useGetData";
+import { useSession } from "next-auth/react";
 // import { navLinks } from "./NavLinks";
 
 function Layout({ children }) {
@@ -21,15 +22,12 @@ function Layout({ children }) {
 
   // const { token, id, user_role } = useSelector((state) => state.auth);
 
-  const { logo, photo, user_name, institution_name, role } = useSelector(
-    (state) => state.info
-  );
-
-  // const { logo, user_name, institution_name, role } = useSelector(
+  // const { logo, photo, user_name, institution_name, role } = useSelector(
   //   (state) => state.info
   // );
 
-  // const { role } = useSelector((state) => state.login);
+  const { data } = useSession();
+  const { institution_name, user_name, role } = data ? data.user : "";
 
   Router.events.on("routeChangeStart", (url) => {
     setLoading(true);
@@ -45,12 +43,14 @@ function Layout({ children }) {
 
   const { fetchedData } = useGetData("parent/personal/data");
 
-  useEffect(() => {
-    fetchedData && dispatch(getInfo(fetchedData));
-    // if (user_role !== "parent") {
-    //   router.push("/");
-    // }
-  }, [dispatch, fetchedData]);
+  const { photo, logo } = fetchedData;
+
+  // useEffect(() => {
+  //   fetchedData && dispatch(getInfo(fetchedData));
+  //   // if (user_role !== "parent") {
+  //   //   router.push("/");
+  //   // }
+  // }, [dispatch, fetchedData]);
 
   //for authorization
   // useEffect(() => {
@@ -79,8 +79,8 @@ function Layout({ children }) {
           setShowMenu={setShowMenu}
           logo={logo}
           photo={photo}
-          userName={user_name}
-          institutionName={institution_name}
+          user_name={user_name}
+          institution_name={institution_name}
           role={role}
         />
 

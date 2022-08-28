@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
@@ -9,6 +9,10 @@ import { useSelector, useDispatch } from "react-redux";
 import useLogin from "../Hooks/useLogin";
 import { signIn, useSession } from "next-auth/react";
 import Cookies from "js-cookie";
+import Loader from "../Layout/Loader";
+import FullPageLoader from "../Layout/FullPageLoader";
+import { BsEyeSlash, BsEye } from "react-icons/bs";
+import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 
 function LoginForm({ user, loginRoute, dashboardRoute }) {
   const initialvalues =
@@ -36,6 +40,8 @@ function LoginForm({ user, loginRoute, dashboardRoute }) {
         });
 
   const router = useRouter();
+
+  const [showPassword, setShowPassword] = useState(false);
 
   // const { data } = useSession();
   // const { token, id, user_name, institution_name, role } = data
@@ -88,58 +94,76 @@ function LoginForm({ user, loginRoute, dashboardRoute }) {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <ToastContainer />
-      <div className="bg-gray-200 px-10 py-14 shadow-lg">
-        <h1 className="text-2xl font-semibold text-center">
-          Log in as <span className="capitalize">{user}</span>
-        </h1>
+    <>
+      <div className="flex justify-center items-center h-screen">
+        <ToastContainer />
+        <div className="bg-white px-10 py-14 shadow-lg">
+          <h1 className="text-2xl font-semibold text-center">
+            Log in as <span className="capitalize">{user}</span>
+          </h1>
 
-        <div className="mt-8">
-          <Formik
-            initialValues={initialvalues}
-            validationSchema={validate}
-            onSubmit={handleSubmit}
-          >
-            {(formik) => (
-              <Form>
-                <div className="text-sm gap-y-5 md:gap-y-7">
-                  <div className="min-w-[400px] space-y-4">
-                    {user !== "super admin" && (
-                      <TextField
-                        label="Institution Id *"
-                        name="identity_id"
-                        type="text"
-                      />
+          <div className="mt-8">
+            <Formik
+              initialValues={initialvalues}
+              validationSchema={validate}
+              onSubmit={handleSubmit}
+            >
+              {(formik) => (
+                <Form>
+                  <div className="text-sm gap-y-5 md:gap-y-7">
+                    <div className="min-w-[350px] space-y-4">
+                      {user !== "super admin" && (
+                        <TextField
+                          label="Institution Id *"
+                          name="identity_id"
+                          type="text"
+                        />
+                      )}
+                      <TextField label="Email *" name="email" type="email" />
+                      <div className="relative">
+                        <TextField
+                          label="Password *"
+                          name="password"
+                          type={showPassword ? "text" : "password"}
+                          autoComplete="on"
+                        />
+                        <div
+                          className="absolute right-3 top-[30px] text-base p-[6px] cursor-pointer hover:bg-gray-200 active:bg-gray-300 rounded-full"
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          {/* {showPassword ? <FaRegEye /> : <FaRegEyeSlash />} */}
+                          {showPassword ? <BsEye /> : <BsEyeSlash />}
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      className="mt-6 px-5 py-2 border-2 border-green-500 rounded text-green-500 text-sm hover:bg-gray-300 transition duration-300"
+                    >
+                      Login
+                    </button>
+                    {/* <span className="ml-5 text-sm text-green-600 ">
+                      {status === "loading" && <p>logging in</p>}
+                    </span> */}
+                    {user === "super admin" && (
+                      <p className="mt-6 text-xs text-teal-600">
+                        <a
+                          href="https://shannonit.vercel.app/school-management-system"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Don&apos;t have an account? Register here
+                        </a>
+                      </p>
                     )}
-                    <TextField label="Email *" name="email" type="email" />
-                    <TextField
-                      label="Password *"
-                      name="password"
-                      type="password"
-                      autoComplete="on"
-                    />
                   </div>
-                  <button
-                    type="submit"
-                    className="mt-6 px-5 py-2 border-2 border-green-500 rounded text-green-500 text-sm hover:bg-gray-300 transition duration-300"
-                  >
-                    Login
-                  </button>
-                  {user === "super admin" && (
-                    <p className="mt-4 text-xs text-teal-600">
-                      <a href="https://shannonit.vercel.app/school-management-system">
-                        Don&apos;t have an account? Register here
-                      </a>
-                    </p>
-                  )}
-                </div>
-              </Form>
-            )}
-          </Formik>
+                </Form>
+              )}
+            </Formik>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -24,7 +24,7 @@ export const TextField = ({ label, ...props }) => {
       <label {...props}>{label}</label>
       <div className="mt-1 relative">
         <Field
-          className="p-2 w-full outline-none bg-slate-100 border border-slate-300 focus:border-slate-500"
+          className="p-2 w-full outline-none bg-gray-50 border border-gray-200 focus:border-gray-300 focus:shadow"
           // id={name}
           // name={name}
           {...props}
@@ -45,7 +45,7 @@ export const TextArea = ({ label, name, ...props }) => {
         <Field
           as="textarea"
           rows="5"
-          className="p-2 w-full outline-none bg-slate-100 border border-slate-300 focus:border-slate-500"
+          className="p-2 w-full outline-none bg-gray-50 border border-gray-200 focus:border-gray-300  focus:shadow"
           id={name}
           name={name}
           {...props}

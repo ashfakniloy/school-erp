@@ -18,18 +18,31 @@
 //   matchers: ["/", "/login:path*"],
 // };
 
+// export { default } from "next-auth/middleware"
 import { NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
-export default function middleware(req) {
+export default async function middleware(req) {
   const { cookies, url } = req;
   // const jwt = cookies.get("next-auth.session-token");
-  const jwt = cookies.get("token");
+
+  const jwt = cookies.get("next-auth.session-token");
+  // console.log("session-token", jwt);
+  // const jwt = cookies.get("token");
   const role = cookies.get("role");
+  // const sessionToken = cookies.get("next-auth.session-token");
   const { origin, pathname } = req.nextUrl;
+
+  // const gettoken = await getToken({ req });
+  // const { token: jwt, role } = await gettoken?.user;
+
+  // console.log("getToken", id);
+
+  // console.log("sessionToken is", sessionToken);
 
   const userRole = role && role.split("super ").join("");
 
-  if (pathname == "/") {
+  if (pathname === "/") {
     if (jwt && userRole) {
       return NextResponse.redirect(`${origin}/${userRole}`);
     } else {
@@ -82,12 +95,12 @@ export default function middleware(req) {
 
 export const config = {
   matcher: [
-    "/:path*",
-    "/login/:path*",
+    "/",
     "/admin/admin-accounts",
+    "/login/:path*",
     "/admin/:path*",
     "/teacher/:path*",
     "/student/:path*",
-    "/student/:path*",
+    "/parent/:path*",
   ],
 };

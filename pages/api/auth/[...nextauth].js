@@ -5,9 +5,13 @@ import { API_URL } from "../../../config";
 
 const nextAuthOptions = (req, res) => {
   return {
+    // session: {
+    //   strategy: "jwt",
+    // },
     providers: [
       CredentialsProvider({
         name: "Credentials",
+        // credentials: {},
         authorize: async (credentials) => {
           // const payload = {
           //   email: credentials.email,
@@ -31,13 +35,13 @@ const nextAuthOptions = (req, res) => {
 
           if (response.ok && user) {
             res.setHeader("Set-Cookie", [
-              cookie.serialize("token", user.token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV !== "development",
-                maxAge: 30 * 24 * 60 * 60, // 30 days
-                sameSite: "strict",
-                path: "/",
-              }),
+              // cookie.serialize("token", user.token, {
+              //   httpOnly: true,
+              //   secure: process.env.NODE_ENV !== "development",
+              //   maxAge: 30 * 24 * 60 * 60, // 30 days
+              //   sameSite: "strict",
+              //   path: "/",
+              // }),
               cookie.serialize("id", user.id, {
                 // httpOnly: true,
                 // secure: process.env.NODE_ENV !== "development",
@@ -76,10 +80,17 @@ const nextAuthOptions = (req, res) => {
       }),
     ],
 
+    pages: {
+      signIn: "/login/super-admin",
+    },
+
     callbacks: {
-      jwt: async ({ token, user }) => {
+      jwt: async ({ token, user, account }) => {
+        // console.log("xxs", token);
         if (user) {
           token.user = user;
+
+          // token.accessToken = user.access_token;
 
           // token.token = user.token;
           // token.id = user.id;
@@ -87,12 +98,18 @@ const nextAuthOptions = (req, res) => {
           // token.user_name = user.user_name;
           // token.institution_name = user.institution_name;
         }
+        // if (account) {
+        //   token.accessToken = account.access_token;
+        // }
+
+        // console.log("token is", token);
 
         return token;
       },
       session: async ({ session, token }) => {
         if (token) {
           session.user = token.user;
+          // session.accessToken = token.accessToken;
           // session.token = token.token;
           // session.id = token.id;
           // session.role = token.role;

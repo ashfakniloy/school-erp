@@ -11,6 +11,7 @@ import Loader from "../../Layout/Loader";
 import useGetData from "../../Hooks/useGetData";
 import { getInfo } from "../../../redux/features/info/infoSlice";
 // import { API_URL, institution_name, user_name, role } from "../../../config";
+import { token } from "../../../config";
 import { useSession } from "next-auth/react";
 
 // Layout.getInitialProps = async () => {
@@ -41,9 +42,11 @@ function Layout({ children }) {
     // },
   });
 
-  const { role } = data ? data.user : "";
+  const { institution_name, user_name, role } = data ? data.user : "";
+
+  // const { role } = data ? data.user : "";
   // const { user_role } = useSelector((state) => state.auth);
-  const { logo, photo } = useSelector((state) => state.info);
+  // const { logo, photo } = useSelector((state) => state.info);
 
   Router.events.on("routeChangeStart", (url) => {
     setLoading(true);
@@ -60,13 +63,15 @@ function Layout({ children }) {
 
   const { fetchedData } = useGetData(`data/${userRoute}/all`);
 
+  const { photo, logo } = fetchedData;
+
   //for authorization
-  useEffect(() => {
-    fetchedData && dispatch(getInfo(fetchedData));
-    // if (status === "loading") {
-    //   router.push("/");
-    // }
-  }, [dispatch, fetchedData]);
+  // useEffect(() => {
+  //   fetchedData && dispatch(getInfo(fetchedData));
+  //   // if (status === "loading") {
+  //   //   router.push("/");
+  //   // }
+  // }, [dispatch, fetchedData]);
 
   const navLinks = () => {
     if (role !== "super admin") {
@@ -95,10 +100,10 @@ function Layout({ children }) {
             showMenu={showMenu}
             setShowMenu={setShowMenu}
             logo={logo}
-            // phoyo={photo}
-            // userName={user_name}
-            // institutionName={institution_name}
-            // role={role}
+            photo={photo}
+            user_name={user_name}
+            institution_name={institution_name}
+            role={role}
           />
 
           {loading && <Loader />}

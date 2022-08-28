@@ -20,8 +20,8 @@ function Login() {
   // }, [token, id, router, dashboardRoute]);
 
   return (
-    <div className="flex justify-center items-center h-screen bg-slate-200">
-      <div className="grid grid-cols-5 bg-white p-5">
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="grid grid-cols-5 p-5 bg-white shadow-lg">
         {userCategories.map((user) => (
           <div
             key={user.id}

@@ -8,13 +8,16 @@ import Cookies from "js-cookie";
 
 export const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "https://limassolwaterdelivery.com/v1";
+// export const API_URL = process.env.NEXTAUTH_URL;
+
 export const NEXT_URL = "http://localhost:3000";
 
-export const token = Cookies.get("next-auth.session-token");
-export const institution_name = Cookies.get("institution_name");
-export const id = Cookies.get("id");
-export const user_name = Cookies.get("user_name");
-export const role = Cookies.get("role");
+// export const token = Cookies.get("next-auth.session-token");
+// export const token = Cookies.get("token");
+// export const institution_name = Cookies.get("institution_name");
+// export const id = Cookies.get("id");
+// export const user_name = Cookies.get("user_name");
+// export const role = Cookies.get("role");
 
 // export const token =
 //   typeof window !== "undefined"

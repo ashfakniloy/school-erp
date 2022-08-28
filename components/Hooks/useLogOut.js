@@ -14,10 +14,12 @@ function useLogOut() {
       callbackUrl: `${window.location.origin}`,
       // redirect: false,
     });
+
     Cookies.remove("id");
     Cookies.remove("user_name");
     Cookies.remove("institution_name");
     Cookies.remove("role");
+    Cookies.remove("token");
     // router.push("/");
     dispatch(resetInfo());
   };
