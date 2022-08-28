@@ -26,7 +26,8 @@ export default async function middleware(req) {
   const { cookies, url } = req;
   // const jwt = cookies.get("next-auth.session-token");
 
-  const jwt = cookies.get("next-auth.session-token");
+  // const jwt = cookies.get("next-auth.session-token");
+  const jwt = cookies.get("__Secure-next-auth.session-token");
   // console.log("session-token", jwt);
   // const jwt = cookies.get("token");
   const role = cookies.get("role");

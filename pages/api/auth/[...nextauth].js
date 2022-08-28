@@ -42,13 +42,13 @@ const nextAuthOptions = (req, res) => {
               //   sameSite: "strict",
               //   path: "/",
               // }),
-              cookie.serialize("id", user.id, {
-                // httpOnly: true,
-                // secure: process.env.NODE_ENV !== "development",
-                maxAge: 30 * 24 * 60 * 60, // 30 days
-                sameSite: "strict",
-                path: "/",
-              }),
+              // cookie.serialize("id", user.id, {
+              //   // httpOnly: true,
+              //   // secure: process.env.NODE_ENV !== "development",
+              //   maxAge: 30 * 24 * 60 * 60, // 30 days
+              //   sameSite: "strict",
+              //   path: "/",
+              // }),
               cookie.serialize("role", user.role, {
                 // httpOnly: true,
                 // secure: process.env.NODE_ENV !== "development",
@@ -56,20 +56,20 @@ const nextAuthOptions = (req, res) => {
                 sameSite: "strict",
                 path: "/",
               }),
-              cookie.serialize("institution_name", user.institution_name, {
-                // httpOnly: true,
-                // secure: process.env.NODE_ENV !== "development",
-                maxAge: 30 * 24 * 60 * 60, // 30 days
-                sameSite: "strict",
-                path: "/",
-              }),
-              cookie.serialize("user_name", user.user_name, {
-                // httpOnly: true,
-                // secure: process.env.NODE_ENV !== "development",
-                maxAge: 30 * 24 * 60 * 60, // 30 days
-                sameSite: "strict",
-                path: "/",
-              }),
+              // cookie.serialize("institution_name", user.institution_name, {
+              //   // httpOnly: true,
+              //   // secure: process.env.NODE_ENV !== "development",
+              //   maxAge: 30 * 24 * 60 * 60, // 30 days
+              //   sameSite: "strict",
+              //   path: "/",
+              // }),
+              // cookie.serialize("user_name", user.user_name, {
+              //   // httpOnly: true,
+              //   // secure: process.env.NODE_ENV !== "development",
+              //   maxAge: 30 * 24 * 60 * 60, // 30 days
+              //   sameSite: "strict",
+              //   path: "/",
+              // }),
             ]);
             return user;
           } else {
