@@ -1,10 +1,10 @@
 import { toast } from "react-toastify";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import Cookies from "js-cookie";
 
 function useLogin(loginRoute, dashboardRoute) {
   const router = useRouter();
+
   const { data } = useSession();
   const { id, user_name, institution_name, role } = data ? data.user : "";
 
@@ -24,7 +24,7 @@ function useLogin(loginRoute, dashboardRoute) {
   //     console.log(res.error);
   //     toast.error(error);
   //   }
-  // }
+  // };
 
   const loginUser = (values) => {
     signIn("credentials", {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,6 +15,18 @@ import { BsEyeSlash, BsEye } from "react-icons/bs";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 
 function LoginForm({ user, loginRoute, dashboardRoute }) {
+  const [loading, setLoading] = useState();
+
+  Router.events.on("routeChangeStart", (url) => {
+    setLoading(true);
+  });
+  Router.events.on("routeChangeComplete", (url) => {
+    setLoading(false);
+  });
+  Router.events.on("routeChangeError", (url) => {
+    setLoading(false);
+  });
+
   const initialvalues =
     user === "super admin"
       ? {
@@ -96,12 +108,12 @@ function LoginForm({ user, loginRoute, dashboardRoute }) {
   return (
     <>
       <div className="flex justify-center items-center h-screen">
+        {loading && <FullPageLoader />}
         <ToastContainer />
         <div className="bg-white px-10 py-14 shadow-lg">
           <h1 className="text-2xl font-semibold text-center">
             Log in as <span className="capitalize">{user}</span>
           </h1>
-
           <div className="mt-8">
             <Formik
               initialValues={initialvalues}

@@ -16,10 +16,11 @@ function useLogOut() {
     });
 
     Cookies.remove("id");
-    Cookies.remove("user_name");
-    Cookies.remove("institution_name");
     Cookies.remove("role");
-    Cookies.remove("token");
+    Cookies.remove("identity_id");
+    // Cookies.remove("user_name");
+    // Cookies.remove("institution_name");
+    // Cookies.remove("token");
     // router.push("/");
     dispatch(resetInfo());
   };

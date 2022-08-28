@@ -22,17 +22,17 @@
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
-export default async function middleware(req) {
+export default function middleware(req) {
   const { cookies, url } = req;
   // const jwt = cookies.get("next-auth.session-token");
 
   // const jwt = cookies.get("next-auth.session-token");
-  const sessionToken =
+  const sessionToken = async () =>
     process.env.NODE_ENV !== "development"
-      ? cookies.get("__Secure-next-auth.session-token")
-      : cookies.get("next-auth.session-token");
+      ? await cookies.get("__Secure-next-auth.session-token")
+      : await cookies.get("next-auth.session-token");
 
-  const jwt = sessionToken;
+  const jwt = sessionToken();
   // console.log("session-token", jwt);
   // const jwt = cookies.get("token");
   const role = cookies.get("role");

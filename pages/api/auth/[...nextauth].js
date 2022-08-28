@@ -49,6 +49,13 @@ const nextAuthOptions = (req, res) => {
               //   sameSite: "strict",
               //   path: "/",
               // }),
+              // cookie.serialize("identity_id", user.identity_id, {
+              //   // httpOnly: true,
+              //   // secure: process.env.NODE_ENV !== "development",
+              //   maxAge: 30 * 24 * 60 * 60, // 30 days
+              //   sameSite: "strict",
+              //   path: "/",
+              // }),
               cookie.serialize("role", user.role, {
                 // httpOnly: true,
                 // secure: process.env.NODE_ENV !== "development",
@@ -85,7 +92,7 @@ const nextAuthOptions = (req, res) => {
     },
 
     callbacks: {
-      jwt: async ({ token, user, account }) => {
+      jwt: async ({ token, user }) => {
         // console.log("xxs", token);
         if (user) {
           token.user = user;
@@ -120,6 +127,7 @@ const nextAuthOptions = (req, res) => {
         return session;
       },
     },
+
     secret: process.env.NEXTAUTH_SECRET,
   };
 };
