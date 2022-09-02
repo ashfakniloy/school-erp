@@ -5,7 +5,7 @@
 // export const API_URL = "http://34.131.4.194/v1";
 
 export const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "https://limassolwaterdelivery.com/v1";
+  process.env.NEXT_PUBLIC_API_URL;
 // export const API_URL = process.env.NEXTAUTH_URL;
 
 export const NEXT_URL = "http://localhost:3000";
